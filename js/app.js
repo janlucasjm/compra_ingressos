@@ -1,36 +1,29 @@
 function comprar() {
     const selecaoIngresso = document.getElementById('tipo-ingresso').value;
     const quantidadeIngresso = document.getElementById('qtd').value;
-    let quantidadeIngressoPista = document.getElementById('qtd-pista');
-    let quantidadeIngressoInferior = document.getElementById('qtd-inferior');
-    let quantidadeIngressoSuperior = document.getElementById('qtd-superior');
 
-    switch (selecaoIngresso) {
-        case 'pista':
-            if(quantidadeIngressoPista.textContent > 0 && quantidadeIngresso <= 100) {
-                quantidadeIngressoPista.textContent -= quantidadeIngresso
-            } else {
-                alert(`Quantidade indisponivel para ${selecaoIngresso}`)
-            }
-            break;
-
-        case 'inferior':
-            if(quantidadeIngressoInferior.textContent > 0 && quantidadeIngresso <= 400) {
-                quantidadeIngressoInferior.textContent -= quantidadeIngresso
-            } else {
-                alert(`Quantidade indisponivel para ${selecaoIngresso}`)
-            }
-            break
-    
-        case 'superior':
-            if(quantidadeIngressoSuperior.textContent > 0 && quantidadeIngresso <= 200) {
-                quantidadeIngressoSuperior.textContent -= quantidadeIngresso
-            } else {
-                alert(`Quantidade indisponivel para ${selecaoIngresso}`)
-            }
-            break;
-
-        default:
-            break;
+    const ingressoElementos = {
+        'pista' : document.getElementById('qtd-pista'),
+        'inferior' : document.getElementById('qtd-inferior'),
+        'superior' : document.getElementById('qtd-superior')
     }
+
+    const quantidadeDisponivel = parseInt(ingressoElementos[selecaoIngresso].textContent)
+
+    if(quantidadeDisponivel > 0 && quantidadeIngresso <= getMaxQuantidade(selecaoIngresso)) {
+        ingressoElementos[selecaoIngresso].textContent -= quantidadeIngresso;
+    } else {
+        alert(`Quantidade indisponível para ${selecaoIngresso}`)
+    }
+
+}
+
+function getMaxQuantidade(tipoIngresso) {
+    const maxQuantidades = {
+        'pista' : 100,
+        'inferior' : 400,
+        'superior' : 200
+    };
+
+    return maxQuantidades[tipoIngresso] || 0;
 }
