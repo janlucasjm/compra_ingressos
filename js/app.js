@@ -10,7 +10,7 @@ function comprar() {
 
     const quantidadeDisponivel = parseInt(ingressoElementos[selecaoIngresso].textContent)
 
-    if(quantidadeDisponivel > 0 && quantidadeIngresso <= getMaxQuantidade(selecaoIngresso)) {
+    if(quantidadeDisponivel > 0 && quantidadeIngresso <= getMaxQuantidade(selecaoIngresso) && quantidadeIngresso <= quantidadeDisponivel) {
         ingressoElementos[selecaoIngresso].textContent -= quantidadeIngresso;
     } else {
         alert(`Quantidade indisponível para ${selecaoIngresso}`)
